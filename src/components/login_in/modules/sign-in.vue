@@ -84,7 +84,7 @@
 
             if (data.reason == "Password doesn't match") {
               let result = this.$util.addFailTimes();
-              console.log(result);
+              //console.log(result);
               if (result) {
                 this.$util.post("lockUser", {username: this.form.username}, () => {
                   this.$Message.error("尝试登陆次数太多，账户已被锁定，请联系管理员解锁账户");

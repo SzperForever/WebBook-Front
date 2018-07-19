@@ -2,7 +2,7 @@
   <div>
     <top-bar></top-bar>
 
-    <table class="ui celled striped table" style="margin-top: 9vh;">
+    <table class="ui celled table" style="margin-top: 10vh;">
       <tr>
         <th>订单号</th>
         <th>总价</th>
@@ -15,7 +15,7 @@
         <th>{{order.totalPrice}}</th>
         <th>{{order.address}}</th>
         <th>
-          <ul>
+          <ul >
             <li style="display:inline;list-style: none" v-for="book in order.books">
               {{book.name}}
             </li>
@@ -25,10 +25,13 @@
             未发货
         </th>
         <th v-if="order.status==1">
-          已发货
+          已发货<Button @click="changeState(order)" size="small" type="success">签收</Button>
         </th>
         <th v-if="order.status==2">
-          已签收
+          已签收<Button v-if="order.status == 2" @click="returnGoods(order)" size="small" type="error">退货</Button>
+        </th>
+        <th v-if="order.status == -2">
+          已退货
         </th>
       </tr>
     </table>
@@ -43,6 +46,26 @@
     data() {
       return {
         orderData : null
+      }
+    },
+    methods:{
+      changeState(order){
+        this.$util.post('changeStatus',{
+          orderId : order.id,
+          status : order.status
+        },(response)=>{
+          console.log(response)
+          this.$Message.success("签收成功")
+        })
+      },
+      returnGoods(order){
+        this.$util.post('changeStatus',{
+          orderId : order.id,
+          status : -1
+        },(response)=>{
+          console.log(response)
+          this.$Message.success("退货成功")
+        })
       }
     },
     mounted(){
