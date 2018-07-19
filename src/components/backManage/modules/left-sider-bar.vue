@@ -1,5 +1,5 @@
 <template>
-  <div class="ui  menu">
+  <div class="ui  menu" style="    z-index: 1;">
     <Menu mode="horizontal" theme="light" active-name="1" @on-select="select">
       <MenuItem name="1">
         <Icon type="ios-paper"></Icon>

@@ -1,7 +1,7 @@
 <template>
   <div>
-        <top-bar></top-bar>
-    <book-list></book-list>
+    <top-bar></top-bar>
+    <book-list style="    margin-top: 9vh;"></book-list>
   </div>
 </template>
 
