@@ -14,7 +14,7 @@
         <th v-if="order.status == 1">已发货</th>
         <th v-if="order.status == 2">已签收</th>
         <th v-if="order.status == 3">退货</th>
-        <th><button @click="sendGoods(order)">发货</button></th>
+        <th><Button type="success" @click="sendGoods(order)">发货</Button></th>
       </tr>
     </table>
   </div>

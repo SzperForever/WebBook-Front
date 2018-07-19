@@ -9,6 +9,9 @@ var Util = {
     username: null,
     userId: null
   },
+  role: {
+    role: null
+  },
   chart: {
     bookList: [],
     sumPrice: 0
@@ -21,6 +24,12 @@ var Util = {
     var result = Vue.cookie.get(name)
     if (result == undefined) return undefined
     return JSON.parse(result);
+  },
+  setRole: function(roleId){
+    this.role.role = roleId
+  },
+  getRole: function(){
+    return this.role.role
   },
   setUser: function (username, userId) {
     this.user.username = username;

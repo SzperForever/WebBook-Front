@@ -18,10 +18,10 @@
         <td v-if="user.fails >= 3">锁定</td>
         <td v-if="user.fails < 3">正常</td>
         <td>
-          <button @click="deleteUser(user.id)">删除</button>
+          <Button type="error" @click="deleteUser(user.id)">删除</Button>
         </td>
         <td v-if="user.fails >= 3">
-          <button @click="unlockUser(user.id)">解锁用户</button>
+          <Button type="success" @click="unlockUser(user.id)">解锁用户</Button>
         </td>
       </tr>
     </table>

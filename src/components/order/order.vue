@@ -46,7 +46,6 @@
       }
     },
     mounted(){
-
       this.$util.post('getAllOrder',{userId : this.$util.getUser().userId},(response)=>{
           this.orderData = response;
         console.log(this.orderData)

@@ -10,7 +10,7 @@
       订单
     </router-link>
     <a class="item" v-on:click.prevent="logOut">登出</a>
-    <router-link to="/manage" class="item">
+    <router-link to="/manage" class="item" id="manage_item">
       后台管理
     </router-link>
   </div>
@@ -23,7 +23,20 @@
       logOut() {
         this.$util.set("user", null)
         location.reload();
+      },
+      displayManage(){
+        let Data = {name:this.$util.getUser().username}
+        let User = this.$util.post('getUserByName', Data, (data) => {
+          if(data.role === 0){
+            $('#manage_item').css('display', 'none');
+          }
+          else
+            $('#manage_item').css('display', 'block');
+        })
       }
+    },
+    created:function () {
+        this.displayManage()
     }
   }
 </script>

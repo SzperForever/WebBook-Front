@@ -13,6 +13,16 @@
           <Select v-model="address" style="width:200px">
             <Option v-for="item in addressData" :value="item.value" :key="item.value">{{ item.label }}</Option>
           </Select>
+          <Button @click="addAddress"><Icon type="ios-plus-empty"></Icon>添加地址</Button>
+          <div id="addAddress-modal" class="ui modal">
+            <div class="content">
+              <Input v-model="Address" placeholder="填入地址" />
+            </div>
+            <div class="actions">
+              <div class="ui button" @click="cancle">取消</div>
+              <div class="ui button" @click="add">添加</div>
+            </div>
+          </div>
         </div>
       </div>
       <div class="actions">
@@ -47,7 +57,9 @@
         address: [],
         addressData: [],
         modalDom: null,
-        bus : BusFactory(this)
+        modalDomadd: null,
+        bus : BusFactory(this),
+        Address: null
       }
     },
     methods: {
@@ -66,12 +78,28 @@
           price: this.price
         };
         this.bus.$emit('submitOrder',data)
+      },
+      addAddress(){
+        this.modalDomadd.modal("show")
+      },
+      add(){
+        let Data = {
+          userId: parseInt(this.$util.getUser().userId),
+          content: this.Address
+        }
+        this.$util.post('addAddress', Data, (data) => {
+          this.$Message.success(data.msg)
+          this.modalDomadd.modal("hide")
+        })
+      },
+      cancle(){
+        this.modalDomadd.modal("hide")
       }
     },
     mounted() {
 
       this.modalDom = $('#confirm-modal').modal();
-
+      this.modalDomadd = $('#addAddress-modal').modal();
       this.bus.$on('closeModal',()=>{
         this.closeModal()
       });

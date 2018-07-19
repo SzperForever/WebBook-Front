@@ -2,9 +2,9 @@
   <div>
     <div id="book-modal" class="ui modal">
       <div class="content">
-        <Input v-model="bookName"></Input>
-        <Input v-model="bookPrice"></Input>
-        <Input v-model="bookStock"></Input>
+        <span>书名：</span><Input v-model="bookName"></Input>
+        <span>价格：</span><Input v-model="bookPrice"></Input>
+        <span>库存：</span><Input v-model="bookStock"></Input>
       </div>
       <div class="actions">
         <button class="ui button green" @click="submitChange()">提交</button>
@@ -27,10 +27,10 @@
         <td>{{book.price}}</td>
         <td>{{book.stock}}</td>
         <td>
-          <button @click="edit(book)">编辑</button>
+          <Button type="success" @click="edit(book)">编辑</Button>
         </td>
         <td>
-          <button @click="deleteBook(book.id)">删除</button>
+          <Button type="error" @click="deleteBook(book.id)">删除</Button>
         </td>
       </tr>
     </table>
@@ -71,7 +71,14 @@
           price: this.bookPrice,
           stock: this.bookStock
         }, (response) => {
-
+          if(response.code === 1) {
+            this.$Message.success(response.msg)
+            this.close()
+          }
+          else{
+            this.$Message.success(response.msg)
+            this.close()
+          }
         })
       },
       deleteBook(bookId) {
